@@ -1,7 +1,11 @@
 <script>
 import axios from 'axios'
+
 let API_URL = `https://rickandmortyapi.com/api/character`
+
+
 export default {
+
   data() {
     return {
       info: [],
@@ -12,6 +16,7 @@ export default {
       buscar:'',
     }
   },
+
   mounted() {
     axios.get(API_URL)
       .then((response) => {
@@ -19,7 +24,7 @@ export default {
         this.personajes = response.data.results;
       })
   },
-  
+
   methods: {
     navpag(num) {
       API_URL='https://rickandmortyapi.com/api/character/?page='+this.pagina
@@ -46,16 +51,18 @@ export default {
 
 </script>
 
-<template >
+<template>
+  
   <div class="text-center">
     <input v-model="buscar" placeholder="Buscar" />
   <button @click="buscador(buscar)">Buscar</button>
-
+    <br>
   <h2>Hay {{ info.count }} personajes en el programa de Rick & Morty</h2>
-
+    <br>
   <button class="button bg-white text-black" v-if="pagina!==1" @click="navpag(pagina--)">Anterior</button>
   <a>{{pagina }}</a>
   <button class="button bg-red-700" v-if="pagina!==this.info.pages" @click="navpag(pagina++)">Siguiente</button>
+    <br>
   <ul>
     <li v-for="p in personajes">
       <a>{{ p.name }}</a>
